@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>끌리메뷰티 디바이스 3채널 프로모션 전략 평가</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=DM+Mono:wght@400;500&display=swap');
+
+  :root {
+    --bg: #F7F6F3;
+    --surface: #FFFFFF;
+    --surface-2: #F0EEE9;
+    --ink: #1A1917;
+    --ink-muted: #6B6860;
+    --accent: #C8A882;
+    --accent-light: #F0E8DC;
+    --green: #3D7A5E;
+    --green-light: #E6F2EC;
+    --yellow: #C49A1A;
+    --yellow-light: #FBF3DC;
+    --red: #B04040;
+    --red-light: #F5E8E8;
+    --border: #E2DED7;
+    --mono: 'DM Mono', monospace;
+    --sans: 'Noto Sans KR', sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.7;
+    font-size: 14px;
+  }
+
+  /* HEADER */
+  .header {
+    background: var(--ink);
+    color: white;
+    padding: 48px 40px 40px;
+  }
+  .header-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 12px;
+  }
+  .header-sub {
+    color: #A8A49E;
+    font-size: 13px;
+    font-weight: 300;
+  }
+
+  /* CONSTRAINT BANNER */
+  .constraint-banner {
+    background: var(--accent-light);
+    border-left: 4px solid var(--accent);
+    margin: 24px 24px 0;
+    border-radius: 0 8px 8px 0;
+    padding: 16px 20px;
+  }
+  .constraint-banner .label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .constraint-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .constraint-list li {
+    font-size: 13px;
+    color: #5A4A35;
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+  }
+  .constraint-list li::before {
+    content: "→";
+    color: var(--accent);
+    font-family: var(--mono);
+    flex-shrink: 0;
+  }
+
+  /* MAIN CONTENT */
+  .content {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  /* SECTION LABEL */
+  .section-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 12px;
+  }
+
+  /* CHANNEL CARDS */
+  .channel-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .channel-card {
+    background: var(--surface);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+
+  .channel-header {
+    padding: 16px 20px 12px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .channel-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .channel-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 20px;
+    font-weight: 500;
+  }
+  .tag-own { background: var(--green-light); color: var(--green); }
+  .tag-aff { background: var(--yellow-light); color: var(--yellow); }
+  .tag-collab { background: var(--accent-light); color: #8B6A45; }
+
+  .channel-body {
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .price-row {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+  .price-main {
+    font-family: var(--mono);
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .price-discount {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--red);
+    background: var(--red-light);
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+  .price-net {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-muted);
+  }
+
+  .detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .detail-item {
+    background: var(--surface-2);
+    border-radius: 8px;
+    padding: 10px 12px;
+  }
+  .detail-item .d-label {
+    font-size: 10px;
+    color: var(--ink-muted);
+    margin-bottom: 4px;
+  }
+  .detail-item .d-value {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.4;
+  }
+
+  /* EVALUATION SCORES */
+  .eval-row {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .eval-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .eval-label {
+    font-size: 11px;
+    color: var(--ink-muted);
+    width: 80px;
+    flex-shrink: 0;
+  }
+  .eval-dots {
+    display: flex;
+    gap: 4px;
+  }
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+  .dot-on-green { background: var(--green); }
+  .dot-on-yellow { background: var(--yellow); }
+  .dot-on-red { background: var(--red); }
+  .dot-off { background: var(--border); }
+
+  /* RISK SECTION */
+  .risk-card {
+    background: var(--surface);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+  .risk-header {
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .risk-badge {
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 20px;
+  }
+  .badge-warn { background: var(--red-light); color: var(--red); }
+  .risk-title { font-size: 13px; font-weight: 700; }
+  .risk-body { padding: 16px 20px; }
+
+  .flow-box {
+    background: var(--surface-2);
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-family: var(--mono);
+    font-size: 12px;
+    line-height: 1.9;
+    color: #3D3A35;
+    margin-bottom: 12px;
+    white-space: pre-wrap;
+  }
+  .risk-desc {
+    font-size: 12px;
+    color: var(--ink-muted);
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+
+  /* FIX TABLE */
+  .fix-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+  }
+  .fix-table th {
+    background: var(--surface-2);
+    padding: 8px 12px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 11px;
+    color: var(--ink-muted);
+    border-bottom: 1px solid var(--border);
+  }
+  .fix-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    line-height: 1.6;
+  }
+  .fix-table tr:last-child td { border-bottom: none; }
+
+  /* SUPPLEMENT CARDS */
+  .supplement-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .supplement-card {
+    background: var(--surface);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    padding: 16px 20px;
+  }
+  .supplement-num {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+  .supplement-title {
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .supplement-body {
+    font-size: 12px;
+    color: var(--ink-muted);
+    line-height: 1.7;
+  }
+
+  .before-after {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .ba-box {
+    background: var(--surface-2);
+    border-radius: 8px;
+    padding: 12px;
+  }
+  .ba-label {
+    font-size: 10px;
+    font-family: var(--mono);
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+  .ba-label-before { color: var(--red); }
+  .ba-label-after { color: var(--green); }
+  .ba-text {
+    font-size: 12px;
+    line-height: 1.6;
+  }
+
+  .option-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .option-box {
+    border-radius: 8px;
+    padding: 12px;
+    border-left: 3px solid;
+  }
+  .option-a {
+    background: var(--green-light);
+    border-color: var(--green);
+  }
+  .option-b {
+    background: var(--yellow-light);
+    border-color: var(--yellow);
+  }
+  .option-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+  .option-label-a { color: var(--green); }
+  .option-label-b { color: var(--yellow); }
+  .option-text {
+    font-size: 12px;
+    line-height: 1.6;
+  }
+
+  /* FINAL SUMMARY TABLE */
+  .summary-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    background: var(--surface);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .summary-table th {
+    background: var(--ink);
+    color: white;
+    padding: 10px 12px;
+    text-align: center;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .summary-table th:first-child { text-align: left; }
+  .summary-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    text-align: center;
+    vertical-align: middle;
+  }
+  .summary-table td:first-child { text-align: left; font-weight: 500; }
+  .summary-table tr:last-child td { border-bottom: none; }
+  .summary-table tr:nth-child(even) td { background: var(--surface-2); }
+
+  .badge-g { display: inline-block; background: var(--green-light); color: var(--green); font-size: 11px; padding: 2px 8px; border-radius: 20px; font-weight: 600; }
+  .badge-y { display: inline-block; background: var(--yellow-light); color: var(--yellow); font-size: 11px; padding: 2px 8px; border-radius: 20px; font-weight: 600; }
+  .badge-r { display: inline-block; background: var(--red-light); color: var(--red); font-size: 11px; padding: 2px 8px; border-radius: 20px; font-weight: 600; }
+
+  /* ACTION CARD */
+  .action-card {
+    background: var(--ink);
+    color: white;
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 4px;
+  }
+  .action-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .action-title {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    line-height: 1.4;
+  }
+  .action-body {
+    font-size: 12px;
+    color: #C0BAB2;
+    line-height: 1.7;
+  }
+  .action-highlight {
+    font-family: var(--mono);
+    background: rgba(200,168,130,0.2);
+    border-left: 3px solid var(--accent);
+    padding: 10px 14px;
+    margin-top: 12px;
+    border-radius: 0 6px 6px 0;
+    font-size: 12px;
+    color: var(--accent);
+    line-height: 1.7;
+  }
+
+  /* FOOTER */
+  .footer {
+    padding: 20px 24px 40px;
+    text-align: center;
+    font-size: 11px;
+    color: var(--ink-muted);
+    font-family: var(--mono);
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-eyebrow">끌리메뷰티 · 디바이스 런칭</div>
+  <h1>3채널 프로모션<br>이해관계 평가 리포트</h1>
+  <div class="header-sub">자사몰 · 어필리에이트 · A급 공동구매 구조 검토</div>
+</div>
+
+<!-- CONSTRAINT BANNER -->
+<div class="constraint-banner">
+  <div class="label">⚠ 변경 불가 전제 조건</div>
+  <ul class="constraint-list">
+    <li>자사몰 329,000원은 경쟁사 회원가(339,000원) 대비 10,000원 저렴한 전략적 가격 — 변경 불가</li>
+    <li>어필리에이트 인플루언서는 자사몰보다 혜택이 좋아야 협의 가능 — 업계 현실</li>
+  </ul>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="content">
+
+  <!-- 채널별 구조 -->
+  <div>
+    <div class="section-label">채널별 현황 구조</div>
+    <div class="channel-grid">
+
+      <!-- 자사몰 -->
+      <div class="channel-card">
+        <div class="channel-header">
+          <div>
+            <div class="channel-name">자사몰 (끌리메뷰티몰)</div>
+            <div style="font-size:11px;color:var(--ink-muted);margin-top:3px;">경쟁사 대비 포지셔닝 채널</div>
+          </div>
+          <span class="channel-tag tag-own">공식몰</span>
+        </div>
+        <div class="channel-body">
+          <div class="price-row">
+            <span class="price-main">329,000원</span>
+            <span class="price-discount">39% 할인</span>
+            <span class="price-net">실수령 329,000원</span>
+          </div>
+          <div class="detail-grid">
+            <div class="detail-item">
+              <div class="d-label">사은품</div>
+              <div class="d-value">앰플 정품 증정</div>
+            </div>
+            <div class="detail-item">
+              <div class="d-label">이벤트 조건</div>
+              <div class="d-value">포토리뷰 작성 시 증정</div>
+            </div>
+            <div class="detail-item">
+              <div class="d-label">수수료</div>
+              <div class="d-value">없음</div>
+            </div>
+            <div class="detail-item">
+              <div class="d-label">목적</div>
+              <div class="d-value">회원 DB 확보 + 리뷰 수집</div>
+            </div>
+          </div>
+          <div class="eval-row">
+            <div class="eval-item">
+              <span class="eval-label">고객 납득도</span>
+              <div class="eval-dots">
+                <div class="dot dot-on-green"></div><div class="dot dot-on-green"></div><div class="dot dot-on-green"></div><div class="dot dot-off"></div><div class="dot dot-off"></div>
+              </div>
+              <span style="font-size:11px;color:var(--ink-muted);">경쟁사 대비 최저가</span>
+            </div>
+            <div class="eval-item">
+              <span class="eval-label">브랜드 수익</span>
+              <div class="eval-dots">
+                <div class="dot dot-on-green"></div><div class="dot dot-on-green"></div><div class="dot dot-on-green"></div><div class="dot dot-on-green"></div><div class="dot dot-on-green"></div>
+              </div>
+              <span style="font-size:11px;color:var(--ink-muted);">전액 수령</span>
+            </div>
+            <div class="eval-item">
+              <span class="eval-label">브랜드 자산</span>
+              <div class="eval-dots">
+                <div class="dot dot-on-green"></div><div class="dot dot-on-green"></div><div class="dot dot-on-green"></div><div class="dot dot-on-green"></div><div class="dot dot-off"></div>
+              </div>
+              <span style="font-size:11px;color:var(--ink-muted);">회원 + 리뷰 확보</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 어필리에이트 -->
+      <div class="channel-card">
+        <div class="channel-header">
+          <div>
+            <div class="channel-name">어필리에이트 <span style="font-size:11px;font-weight:400;color:var(--ink-muted);">(헤메코)</span></div>
+            <div style="font-size:11px;color:var(--ink-muted);margin-top:3px;">인플루언서 팔로워 전용 혜택 채널 · 헤메코 플랫폼 운영</div>
+          </div>
+          <span class="channel-tag tag-aff">인플루언서</span>
+        </div>
+        <div class="channel-body">
+          <div class="price-row">
+            <span class="price-main">309,000원</span>
+            <span class="price-discount">43% 할인</span>
+            <span class="price-net">실수령 185,400원</span>
+          </div>
+          <div class="detail-grid">
+            <div class="detail-item">
+              <div class="d-label">사은품</div>
+              <div class="d-value">트래블키트 + 파우치</div>
+            </div>
+            <div class="detail-item">
+              <div class="d-label">구매인증 이벤트</div>
+              <div class="d-value">PR키트(괄사 풀세트) 5명 증정</div>
+            </div>
+            <div class="detail-item">
+              <div class="d-label">수수료</div>
+              <div class="d-value">40%</div>
+            </div>
+            <div class="detail-item">
+              <div class="d-label">목적</div>
+              <div class="d-value">신규 고객 유입 + 인지도 확산</div>
+            </div>
+          </div>
+          <div class="eval-row">
+            <div class="eval-item">
+              <span class="eval-label">고객 납득도</span>
+              <div class="eval-dots">
+                <div class="dot dot-on-green"></div><div class="dot dot-on-green"></div><div class="dot dot-on-green"></div><div class="dot dot-on-green"></div><div class="dot dot-off"></div>
+              </div>
+              <span style="font-size:11px;color:var(--ink-muted);">팔로워 전용 혜택</span>
+            </div>
+            <div class="eval-item">
+              <span class="eval-label">브랜드 수익</span>
+              <div class="eval-dots">
+                <div class="dot dot-on-yellow"></div><div class="dot dot-on-yellow"></div><div class="dot dot-on-yellow"></div><div class="dot dot-off"></div><div class="dot dot-off"></div>
+              </div>
+              <span style="font-size:11px;color:var(--ink-muted);">수수료 40% 차감</span>
+            </div>
+            <div class="eval-item">
+              <span class="eval-label">브랜드 자산</span>
+              <div class="eval-dots">
+                <div class="dot dot-on-yellow"></div><div class="dot dot-on-yellow"></div><div class="dot dot-on-yellow"></div><div class="dot dot-off"></div><div class="dot dot-off"></div>
+              </div>
+              <span style="font-size:11px;color:var(--ink-muted);">인지도 확산</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- A급 공동구매 -->
+      <div class="channel-card">
+        <div class="channel-header">
+          <div>
+            <div class="channel-name">A급 인플루언서 공동구매</div>
+            <div style="font-size:11px;color:var(--ink-muted);margin-top:3px;">최강 혜택 · 강력 확산 채널</div>
+          </div>
+          <span class="channel-tag tag-collab">공동구매</span>
+        </div>
+        <div class="channel-body">
+          <div class="price-row">
+            <span class="price-main">289,000원</span>
+            <span class="price-discount">46% 할인</span>
+            <span class="price-net">실수령 173,400원</span>
+          </div>
+          <div class="detail-grid">
+            <div class="detail-item">
+              <div class="d-label">사은품</div>
+              <div class="d-value">트래블키트 + 파우치</div>
+            </div>
+            <div class="detail-item">
+              <div class="d-label">구매인증 이벤트</div>
+              <div class="d-value">PR키트(괄사 풀세트) 5명 증정</div>
+            </div>
+            <div class="detail-item">
+              <div class="d-label">수수료</div>
+              <div class="d-value">40%</div>
+            </div>
+            <div class="detail-item">
+              <div class="d-label">목적</div>
+              <div class="d-value">대량 유입 + 강력 바이럴</div>
+            </div>
+          </div>
+          <div class="eval-row">
+            <div class="eval-item">
+              <span class="eval-label">고객 납득도</span>
+              <div class="eval-dots">
+                <div class="dot dot-on-green"></div><div class="dot dot-on-green"></div><div class="dot dot-on-green"></div><div class="dot dot-on-green"></div><div class="dot dot-on-green"></div>
+              </div>
+              <span style="font-size:11px;color:var(--ink-muted);">최고 혜택</span>
+            </div>
+            <div class="eval-item">
+              <span class="eval-label">브랜드 수익</span>
+              <div class="eval-dots">
+                <div class="dot dot-on-yellow"></div><div class="dot dot-on-yellow"></div><div class="dot dot-on-yellow"></div><div class="dot dot-off"></div><div class="dot dot-off"></div>
+              </div>
+              <span style="font-size:11px;color:var(--yellow);">마진율 25% 이상 확인</span>
+            </div>
+            <div class="eval-item">
+              <span class="eval-label">브랜드 자산</span>
+              <div class="eval-dots">
+                <div class="dot dot-on-green"></div><div class="dot dot-on-green"></div><div class="dot dot-on-green"></div><div class="dot dot-on-green"></div><div class="dot dot-on-green"></div>
+              </div>
+              <span style="font-size:11px;color:var(--ink-muted);">강력 바이럴</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 리스크 -->
+  <div>
+    <div class="section-label">남아있는 실질 리스크</div>
+    <div style="display:flex;flex-direction:column;gap:12px;">
+
+      <div class="risk-card">
+        <div class="risk-header">
+          <span class="risk-badge badge-warn">리스크 1</span>
+          <span class="risk-title">가격 노출 시 자사몰 고객 이탈</span>
+        </div>
+        <div class="risk-body">
+          <div class="flow-box">자사몰 고객이 SNS에서 인플루언서 공구를 발견하면?
+
+"나는 329,000원에 샀는데
+저기선 289,000원 + 사은품까지?" 
+
+→ 브랜드 불신 + 자사몰 재구매 의향 하락</div>
+          <div class="risk-desc">채널 간 가격이 외부에 동시에 노출되지 않도록 접근 경로를 분리해야 합니다.</div>
+          <table class="fix-table">
+            <tr>
+              <th>채널</th>
+              <th>차단 방법</th>
+            </tr>
+            <tr>
+              <td>어필리에이트 링크</td>
+              <td>공개 검색 노출 차단, 팔로워 전용 링크로만 접근 가능하게 설정</td>
+            </tr>
+            <tr>
+              <td>공동구매 페이지</td>
+              <td>진행 기간 외 비공개 처리, 캡처 공유 금지 문구 삽입</td>
+            </tr>
+            <tr>
+              <td>자사몰 안내 문구</td>
+              <td>"공식 판매처 기준 최저가 보장"으로 포지셔닝</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="risk-card">
+        <div class="risk-header">
+          <span class="risk-badge" style="background:var(--green-light);color:var(--green);">확인 완료</span>
+          <span class="risk-title">A급 공동구매 수익성 — 마진율 25% 이상 확보</span>
+        </div>
+        <div class="risk-body">
+          <div class="flow-box" style="border-left:3px solid var(--green);background:var(--green-light);color:#2A5C44;">289,000원 × 60% (수수료 40% 제외) = 173,400원 실수령
+
+마진율 25% 이상 확인 → 수익성 구조 이상 없음
+트래블키트·PR키트 원가를 감안해도 운영 가능한 구조
+
+결론: 현재 가격(289,000원)과 사은품 구성 유지 가능</div>
+          <div class="risk-desc" style="color:var(--green);">수익성 리스크는 해소되었습니다. 현재 A급 공동구매 구조는 그대로 진행해도 됩니다.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 보완 제안 -->
+  <div>
+    <div class="section-label">보완 포인트</div>
+    <div class="supplement-list">
+
+      <div class="supplement-card">
+        <div class="supplement-num">보완 01</div>
+        <div class="supplement-title">자사몰 — 가격 방어 논리 강화</div>
+        <div class="supplement-body">
+          가격 경쟁이 아니라 <strong>"공식 채널의 신뢰"</strong>로 포지셔닝해야 합니다.<br>
+          조건부 앰플 증정은 유지하되, 표현 방식을 바꿔 부담을 줄여주세요.
+        </div>
+        <div class="before-after">
+          <div class="ba-box">
+            <div class="ba-label ba-label-before">BEFORE (부담스러운 표현)</div>
+            <div class="ba-text">"리뷰 쓰면 앰플 드려요"</div>
+          </div>
+          <div class="ba-box">
+            <div class="ba-label ba-label-after">AFTER (가볍게 느껴지는 표현)</div>
+            <div class="ba-text">"앰플 받는 방법: 포토리뷰 1장"</div>
+          </div>
+        </div>
+        <div style="margin-top:10px;background:var(--surface-2);border-radius:8px;padding:12px;font-size:12px;color:var(--ink-muted);line-height:1.7;">
+          추가 안내 문구 예시:<br>
+          · "끌리메뷰티 공식몰 단독 | 경쟁사 동급 제품 대비 10,000원 이상 저렴"<br>
+          · "공식몰 회원은 향후 소모품·리필 우선 알림 + 추가 할인 적용"
+        </div>
+      </div>
+
+      <div class="supplement-card">
+        <div class="supplement-num">보완 02</div>
+        <div class="supplement-title">어필리에이트 (헤메코) — 리뷰 수집 대안 방향</div>
+        <div class="supplement-body">
+          헤메코 플랫폼 구조상 자사몰 포토리뷰와 직접 연계는 어렵습니다.<br>
+          대신 아래 방향으로 인플루언서 채널의 콘텐츠 자산을 확보하세요.
+        </div>
+        <div style="margin-top:10px;display:flex;flex-direction:column;gap:8px;">
+          <div class="option-box option-a" style="border-color:var(--accent);background:var(--accent-light);">
+            <div class="option-label" style="color:#8B6A45;">대안 1 — 인스타그램 후기 콘텐츠 활용</div>
+            <div class="option-text">구매인증 이벤트 조건에 "인스타그램 사용 후기 게시 + 브랜드 태그" 포함<br>→ 헤메코 리뷰 대신 SNS 바이럴 콘텐츠로 확보</div>
+          </div>
+          <div class="option-box option-b">
+            <div class="option-label option-label-b">대안 2 — 헤메코 내 리뷰 집중 유도</div>
+            <div class="option-text">헤메코 플랫폼 내 리뷰 작성 시 소정의 혜택 안내<br>→ 자사몰 리뷰와는 별도로 헤메코 채널 신뢰도 자체를 쌓는 전략</div>
+          </div>
+        </div>
+        <div style="margin-top:10px;background:var(--surface-2);border-radius:8px;padding:12px;font-size:12px;color:var(--ink-muted);line-height:1.7;">
+          ※ 자사몰 리뷰 확보는 자사몰 구매자 대상 포토리뷰 이벤트(앰플 증정)로 별도 운영하는 것이 현실적입니다.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 최종 평가 -->
+  <div>
+    <div class="section-label">최종 이해관계 평가 요약</div>
+    <table class="summary-table">
+      <thead>
+        <tr>
+          <th>평가 항목</th>
+          <th>자사몰</th>
+          <th>어필리에이트</th>
+          <th>A급 공구</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>고객 납득도</td>
+          <td><span class="badge-g">✓ 합리적</span></td>
+          <td><span class="badge-g">✓ 합리적</span></td>
+          <td><span class="badge-g">✓ 합리적</span></td>
+        </tr>
+        <tr>
+          <td>브랜드 수익</td>
+          <td><span class="badge-g">✓ 최고</span></td>
+          <td><span class="badge-y">△ 중간</span></td>
+          <td><span class="badge-y">△ 마진 25% 확보</span></td>
+        </tr>
+        <tr>
+          <td>채널 간 충돌</td>
+          <td><span class="badge-y">△ 노출 관리 필요</span></td>
+          <td><span class="badge-y">△ 노출 관리 필요</span></td>
+          <td><span class="badge-y">△ 노출 관리 필요</span></td>
+        </tr>
+        <tr>
+          <td>브랜드 자산</td>
+          <td><span class="badge-g">✓ 회원+리뷰</span></td>
+          <td><span class="badge-y">△ SNS 콘텐츠</span></td>
+          <td><span class="badge-g">✓ 강력 바이럴</span></td>
+        </tr>
+        <tr>
+          <td>구조 지속성</td>
+          <td><span class="badge-g">✓ 안정적</span></td>
+          <td><span class="badge-g">✓ 협의 가능</span></td>
+          <td><span class="badge-g">✓ 안정적</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ACTION -->
+  <div class="action-card">
+    <div class="action-label">지금 당장 실행할 것</div>
+    <div class="action-title">수익성은 확인됐습니다 — 이제 채널 노출 관리가 핵심입니다</div>
+    <div class="action-body">3채널 구조와 마진율 모두 실행 가능한 상태입니다. 남은 과제는 채널 간 가격이 교차 노출되지 않도록 접근 경로를 분리하는 것입니다.</div>
+    <div class="action-highlight">
+      ① 헤메코 어필리에이트 링크 — 공개 검색 노출 차단 설정 확인<br>
+      ② A급 공동구매 페이지 — 진행 기간 외 비공개 처리<br>
+      ③ 자사몰 — "공식 판매처 최저가" 포지셔닝 문구 적용<br>
+      ④ 어필리에이트 구매인증 이벤트 — 인스타 후기 + 브랜드 태그 조건 추가 검토
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  끌리메뷰티 디바이스 런칭 프로모션 전략 검토 · 2025
+</div>
+
+</body>
+</html>
